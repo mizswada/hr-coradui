@@ -185,7 +185,6 @@ export default [
     "child": [
           {
             "title": "Job",
-            "path": "/jobtitles",
             "icon": "ic:sharp-list-alt",
             "child": [
               {
@@ -222,7 +221,6 @@ export default [
           },
           {
             "title": "Organization",
-            "path": "/orangeHR/organization",
             "icon": "ri:organization-chart",
             "child": [
               {
