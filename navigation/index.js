@@ -45,12 +45,12 @@ export default [
       {
         title: "Race & Religion",
         icon:"ic:baseline-settings",
-        path: "/admin/raceReligion",
+        path: "/raceReligion",
       },
       {
         title: "Coparate Branding",
         icon:"streamline:interface-text-formatting-paragraph-bullets-points-bullet-align-paragraph-formatting-bullets-text",
-        path: "/admin/coparateBranding",
+        path: "/coparateBranding",
       },
       {
         title: "Leave",
