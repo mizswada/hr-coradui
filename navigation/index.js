@@ -193,7 +193,7 @@ export default [
           },
           {
             title: "Qualification",
-            path: "/myinfo/qualification",
+            path: "/myinfo/qualifications",
           },
           {
             title: "Membership",
