@@ -225,60 +225,60 @@ export default [
             "child": [
               {
                 "title": "General Information",
-                "path": "/orangeHR/organization/generalinfo",
+                "path": "/organization/generalinfo",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Locations",
-                "path": "/orangeHR/organization/locations",
+                "path": "/organization/locations",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Structure",
-                "path": "/orangeHR/organization/structure",
+                "path": "/organization/structure",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Human Resources SOP",
-                "path": "/orangeHR/organization/hrsop",
+                "path": "/organization/hrsop",
                 "icon": "",
                 "child": []
               },
 
               {
                 "title": "PIM",
-                "path": "/orangeHR/PIM",
+                "path": "/PIM",
                 "icon": "ph:user-circle-gear",
                 "child": [
                   {
                     "title": "Configuration",
-                    "path": "/orangeHR/PIM/configuration",
+                    "path": "/PIM/configuration",
                     "icon": "",
                     "child": [
                       {
                         "title": "Optional Fields",
-                        "path": "/orangeHR/PIM/configuration/optionalfield",
+                        "path": "/PIM/configuration/optionalfield",
                         "icon": "",
                         "child": []
                       },
                       {
                         "title": "Data Import",
-                        "path": "/orangeHR/PIM/configuration/dataimport",
+                        "path": "/PIM/configuration/dataimport",
                         "icon": "",
                         "child": []
                       },
                       {
                         "title": "Reporting Methods",
-                        "path": "/orangeHR/PIM/configuration/reportingmethods",
+                        "path": "/PIM/configuration/reportingmethods",
                         "icon": "",
                         "child": []
                       },
                       {
                         "title": "Termination Reasons",
-                        "path": "/orangeHR/PIM/configuration/terminationreasons",
+                        "path": "/PIM/configuration/terminationreasons",
                         "icon": "",
                         "child": []
                       },
@@ -286,19 +286,19 @@ export default [
                   },
                   {
                     "title": "Employee List",
-                    "path": "/orangeHR/PIM/employeelist",
+                    "path": "/PIM/employeelist",
                     "icon": "ph:user-circle-gear",
                     "child": []
                   },
                   {
                     "title": "Add Employee",
-                    "path": "/orangeHR/PIM/addemployee",
+                    "path": "/PIM/addemployee",
                     "icon": "ph:user-circle-gear",
                     "child": []
                   },
                   {
                     "title": "Employee Report",
-                    "path": "/orangeHR/PIM/report",
+                    "path": "/PIM/report",
                     "icon": "ph:user-circle-gear",
                     "child": []
                   }
