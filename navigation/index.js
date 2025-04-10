@@ -175,6 +175,30 @@ export default [
             title: "Immigration",
             path: "/myinfo/immigration",
           },
+          {
+            title: "Job",
+            path: "/myinfo/job",
+          },
+          {
+            title: "Salary",
+            path: "/myinfo/salary",
+          },
+          {
+            title: "Tax",
+            path: "/myinfo/tax",
+          },
+          {
+            title: "Report To",
+            path: "/myinfo/reportto",
+          },
+          {
+            title: "Qualification",
+            path: "/myinfo/qualification",
+          },
+          {
+            title: "Membership",
+            path: "/myinfo/membership",
+          },
         ],
       },
     ],
