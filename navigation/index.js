@@ -191,31 +191,26 @@ export default [
                 "title": "Job Title",
                 "path": "/jobtitles/job-title",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Pay Grades",
                 "path": "/jobtitles/pay-grades",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Employment Status",
                 "path": "/jobtitles/employmentstat",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Job Categories",
                 "path": "/jobtitles/jobcategories",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Work Shifts",
                 "path": "/jobtitles/workshifts",
                 "icon": "",
-                "child": []
               }
             ]
           },
@@ -227,25 +222,21 @@ export default [
                 "title": "General Information",
                 "path": "/organization/generalinfo",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Locations",
                 "path": "/organization/locations",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Structure",
                 "path": "/organization/structure",
                 "icon": "",
-                "child": []
               },
               {
                 "title": "Human Resources SOP",
                 "path": "/organization/hrsop",
                 "icon": "",
-                "child": []
               },
 
               {
@@ -262,25 +253,21 @@ export default [
                         "title": "Optional Fields",
                         "path": "/PIM/configuration/optionalfield",
                         "icon": "",
-                        "child": []
                       },
                       {
                         "title": "Data Import",
                         "path": "/PIM/configuration/dataimport",
                         "icon": "",
-                        "child": []
                       },
                       {
                         "title": "Reporting Methods",
                         "path": "/PIM/configuration/reportingmethods",
                         "icon": "",
-                        "child": []
                       },
                       {
                         "title": "Termination Reasons",
                         "path": "/PIM/configuration/terminationreasons",
                         "icon": "",
-                        "child": []
                       },
                     ]
                   },
@@ -288,19 +275,16 @@ export default [
                     "title": "Employee List",
                     "path": "/PIM/employeelist",
                     "icon": "ph:user-circle-gear",
-                    "child": []
                   },
                   {
                     "title": "Add Employee",
                     "path": "/PIM/addemployee",
                     "icon": "ph:user-circle-gear",
-                    "child": []
                   },
                   {
                     "title": "Employee Report",
                     "path": "/PIM/report",
                     "icon": "ph:user-circle-gear",
-                    "child": []
                   }
                 ]
               },
