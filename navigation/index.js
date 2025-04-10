@@ -247,7 +247,6 @@ export default [
             "child": [
               {
                 "title": "Configuration",
-                "path": "/PIM/configuration",
                 "icon": "",
                 "child": [
                   {
