@@ -238,59 +238,57 @@ export default [
                 "path": "/organization/hrsop",
                 "icon": "",
               },
-
+            ]
+          },
+          {
+            "title": "PIM",
+            "path": "/PIM",
+            "icon": "ph:user-circle-gear",
+            "child": [
               {
-                "title": "PIM",
-                "path": "/PIM",
-                "icon": "ph:user-circle-gear",
+                "title": "Configuration",
+                "path": "/PIM/configuration",
+                "icon": "",
                 "child": [
                   {
-                    "title": "Configuration",
-                    "path": "/PIM/configuration",
+                    "title": "Optional Fields",
+                    "path": "/PIM/configuration/optionalfield",
                     "icon": "",
-                    "child": [
-                      {
-                        "title": "Optional Fields",
-                        "path": "/PIM/configuration/optionalfield",
-                        "icon": "",
-                      },
-                      {
-                        "title": "Data Import",
-                        "path": "/PIM/configuration/dataimport",
-                        "icon": "",
-                      },
-                      {
-                        "title": "Reporting Methods",
-                        "path": "/PIM/configuration/reportingmethods",
-                        "icon": "",
-                      },
-                      {
-                        "title": "Termination Reasons",
-                        "path": "/PIM/configuration/terminationreasons",
-                        "icon": "",
-                      },
-                    ]
                   },
                   {
-                    "title": "Employee List",
-                    "path": "/PIM/employeelist",
-                    "icon": "ph:user-circle-gear",
+                    "title": "Data Import",
+                    "path": "/PIM/configuration/dataimport",
+                    "icon": "",
                   },
                   {
-                    "title": "Add Employee",
-                    "path": "/PIM/addemployee",
-                    "icon": "ph:user-circle-gear",
+                    "title": "Reporting Methods",
+                    "path": "/PIM/configuration/reportingmethods",
+                    "icon": "",
                   },
                   {
-                    "title": "Employee Report",
-                    "path": "/PIM/report",
-                    "icon": "ph:user-circle-gear",
-                  }
+                    "title": "Termination Reasons",
+                    "path": "/PIM/configuration/terminationreasons",
+                    "icon": "",
+                  },
                 ]
               },
-        
+              {
+                "title": "Employee List",
+                "path": "/PIM/employeelist",
+                "icon": "ph:user-circle-gear",
+              },
+              {
+                "title": "Add Employee",
+                "path": "/PIM/addemployee",
+                "icon": "ph:user-circle-gear",
+              },
+              {
+                "title": "Employee Report",
+                "path": "/PIM/report",
+                "icon": "ph:user-circle-gear",
+              }
             ]
-          }
+          },
         ]
   },
     
