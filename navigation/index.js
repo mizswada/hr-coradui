@@ -1,272 +1,340 @@
 export default [
   {
-    child: [
+    "header": "",
+    "description": "",
+    "child": [
       {
-        title: "Dashboard",
-        path: "/dashboard",
-        icon: "ic:outline-dashboard",
-        child: [],
-      },
-    ],
+        "title": "Dashboard",
+        "path": "/dashboard",
+        "icon": "ic:outline-dashboard",
+        "child": [],
+        "meta": {}
+      }
+    ]
   },
   {
-    header: "Apps & Pages",
-    description: "Wonderful apps",
-    child: [
+    "header": "Naim Works",
+    "description": "",
+    "child": [
       {
-        title: "Pages",
-        icon: "ic:outline-insert-drive-file",
+        title: "Qualification",
+        icon:"healthicons:i-exam-qualification-outline",
         child: [
           {
-            title: "Authentication",
-            child: [
-              {
-                title: "Login V1",
-                path: "/auth/login-v1",
-              },
-              {
-                title: "Login V2",
-                path: "/auth/login-v2",
-              },
-              {
-                title: "Register V1",
-                path: "/auth/register-v1",
-              },
-              {
-                title: "Register V2",
-                path: "/auth/register-v2",
-              },
-              {
-                title: "Forgot Password V1",
-                path: "/auth/forgot-password-v1",
-              },
-              {
-                title: "Forgot Password V2",
-                path: "/auth/forgot-password-v2",
-              },
-              {
-                title: "Reset Password V1",
-                path: "/auth/reset-password-v1",
-              },
-              {
-                title: "Reset Password V2",
-                path: "/auth/reset-password-v2",
-              },
-            ],
+            title: "Skills",
+            path: "/admin/qualifications/skills",
           },
           {
-            title: "Error 404",
-            path: "/error/404",
+            title: "Education",
+            path: "/admin/qualifications/educations",
           },
           {
-            title: "Error 500",
-            path: "/error/500",
+            title: "Licenses",
+            path: "/admin/qualifications/licenses",
+          },
+          {
+            title: "Languages",
+            path: "/admin/qualifications/languages",
+          },
+          {
+            title: "Memberships",
+            path: "/admin/qualifications/memberships",
           },
         ],
       },
       {
-        title: "E-commerce",
+        title: "Race & Religion",
+        icon:"ic:baseline-settings",
+        path: "/admin/raceReligion",
+      },
+      {
+        title: "Coparate Branding",
+        icon:"streamline:interface-text-formatting-paragraph-bullets-points-bullet-align-paragraph-formatting-bullets-text",
+        path: "/admin/coparateBranding",
+      },
+      {
+        title: "Leave",
         icon: "ic:outline-shopping-bag",
         child: [
           {
-            title: "Products",
-            path: "/apps/ecommerce/products",
+            title: "Apply",
+            path: "/leave/apply",
           },
           {
-            title: "Product Detail",
-            path: "/apps/ecommerce/product-detail?sku=P-1001",
+            title: "My Leave",
+            path: "/leave/myLeave",
           },
           {
-            title: "Checkout",
-            path: "/apps/ecommerce/checkout",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    header: "UI Elements",
-    description: "Component for the ui",
-    child: [
-      {
-        title: "Typography",
-        path: "/ui/typography",
-        icon: "ic:outline-alternate-email",
-      },
-      {
-        title: "Colors",
-        path: "/ui/colors",
-        icon: "ic:outline-water-drop",
-      },
-      {
-        title: "Icon",
-        icon: "ic:outline-flag-circle",
-        child: [
-          {
-            title: "Nuxt Icons",
-            path: "/ui/icon/nuxt-icon",
-          },
-        ],
-      },
-      {
-        title: "Component",
-        icon: "ic:outline-settings-input-component",
-        child: [
-          {
-            title: "Alert",
-            path: "/ui/component/alert",
-          },
-          {
-            title: "Badges",
-            path: "/ui/component/badges",
-          },
-          {
-            title: "Buttons",
-            path: "/ui/component/buttons",
-          },
-          {
-            title: "Card",
-            path: "/ui/component/card",
-          },
-          {
-            title: "Calendar",
-            path: "/ui/component/calendar",
-          },
-          {
-            title: "Carousel",
-            path: "/ui/component/carousel",
-          },
-          {
-            title: "Collapse",
-            path: "/ui/component/collapse",
-          },
-          {
-            title: "Dropdown",
-            path: "/ui/component/dropdown",
-          },
-          {
-            title: "Modal",
-            path: "/ui/component/modal",
-          },
-          {
-            title: "Tab",
-            path: "/ui/component/tab",
-          },
-          {
-            title: "Progress",
-            path: "/ui/component/progress",
-          },
-        ],
-      },
-      {
-        title: "Chart",
-        icon: "ic:outline-pie-chart",
-        child: [
-          {
-            title: "Apex Chart",
-            path: "/ui/chart/apex-chart",
-          },
-          {
-            title: "Chartjs",
-            path: "/ui/chart/chartjs",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    header: "Forms & Tables",
-    description: "Form and table component",
-    child: [
-      {
-        title: "Form",
-        icon: "ic:outline-menu-book",
-        child: [
-          {
-            title: "Element",
+            title: "Entitlements",
             child: [
               {
-                title: "Input",
-                path: "/form/element/input",
+                title: "Add Entitlement",
+                path: "/leave/entitlement/addEntitlement",
               },
               {
-                title: "Input Group",
-                path: "/form/element/input-group",
+                title: "Employee Entitlement",
+                path: "/leave/entitlement/employeeEntitlement",
               },
               {
-                title: "Input Mask",
-                path: "/form/element/input-mask",
-              },
-              {
-                title: "Textarea",
-                path: "/form/element/textarea",
-              },
-              {
-                title: "Number",
-                path: "/form/element/number",
-              },
-              {
-                title: "Password",
-                path: "/form/element/password",
-              },
-              {
-                title: "Date & Time",
-                path: "/form/element/date-time",
-              },
-              {
-                title: "Radio",
-                path: "/form/element/radio",
-              },
-              {
-                title: "Checkbox",
-                path: "/form/element/checkbox",
-              },
-              {
-                title: "Select",
-                path: "/form/element/select",
-              },
-              {
-                title: "File",
-                path: "/form/element/file",
-              },
-              {
-                title: "Custom",
-                path: "/form/element/custom",
-              },
-              {
-                title: "VCalendar",
-                path: "/form/element/vcalendar",
-              },
-              {
-                title: "Vue Select",
-                path: "/form/element/vue-select",
-              },
-              {
-                title: "Vue Quill",
-                path: "/form/element/vue-quill",
+                title: "My Entitlement",
+                path: "/leave/entitlement/myEntitlement",
               },
             ],
           },
           {
-            title: "Wizard",
-            path: "/form/wizard",
+            title: "Report",
+            path: "/leave/report",
+          },
+          {
+            title: "Configuration",
+            child: [
+              {
+                title: "Leave period",
+                path: "/leave/configuration/leavePeriod",
+              },
+              {
+                title: "Leave type",
+                path: "/leave/configuration/leaveType",
+              },
+              {
+                title: "Work week",
+                path: "/leave/configuration/workWeek",
+              },
+              {
+                title: "Holidays",
+                path: "/leave/configuration/holidays",
+              },
+            ],
+          },
+          {
+            title: "Leave list",
+            path: "/leave/leaveList",
+          },
+          {
+            title: "Assign leave",
+            path: "/leave/assignLeave",
           },
         ],
       },
       {
-        title: "Table",
-        icon: "ic:outline-grid-on",
+        title: "Claim",
+        icon: "ic:outline-shopping-bag",
         child: [
           {
-            title: "Basic",
-            path: "/table/basic",
+            title: "Configuration",
+            child: [
+              {
+                title: "Events",
+                path: "/claim/configuration/events",
+              },
+              {
+                title: "Expense Types",
+                path: "/claim/configuration/expenseTypes",
+              },
+            ],
           },
           {
-            title: "Advanced",
-            path: "/table/advanced",
+            title: "Submit Claim",
+            path: "/claim/submitClaim",
+          },
+          {
+            title: "My Claims",
+            path: "/claim/myClaims",
+          },
+          {
+            title: "Employee Claims",
+            path: "/claim/employeeClaims",
+          },
+          {
+            title: "Assign Claim",
+            path: "/claim/assignClaim",
+          },
+        ],
+      },
+      {
+        title: "My Info",
+        icon: "ic:outline-shopping-bag",
+        child: [
+          {
+            title: "Personal Details",
+            path: "/myInfo/personalDetails",
+          },
+          {
+            title: "Contact Details",
+            path: "/myInfo/contactDetails",
+          },
+          {
+            title: "Emergency Contacts",
+            path: "/myInfo/emergencyContact",
+          },
+          {
+            title: "Dependents",
+            path: "/myInfo/dependents",
+          },
+          {
+            title: "Immigration",
+            path: "/myinfo/immigration",
           },
         ],
       },
     ],
   },
+  {
+    "header": "Aqib Works",
+    "description": "",
+    "child": [
+          {
+            "title": "Job",
+            "path": "/orangeHR/jobtitles",
+            "icon": "ic:sharp-list-alt",
+            "child": [
+              {
+                "title": "Job Title",
+                "path": "/orangeHR/jobtitles/job-title",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Pay Grades",
+                "path": "/orangeHR/jobtitles/pay-grades",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Employment Status",
+                "path": "/orangeHR/jobtitles/employmentstat",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Job Categories",
+                "path": "/orangeHR/jobtitles/jobcategories",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Work Shifts",
+                "path": "/orangeHR/jobtitles/workshifts",
+                "icon": "",
+                "child": []
+              }
+            ]
+          },
+          {
+            "title": "Organization",
+            "path": "/orangeHR/organization",
+            "icon": "ri:organization-chart",
+            "child": [
+              {
+                "title": "General Information",
+                "path": "/orangeHR/organization/generalinfo",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Locations",
+                "path": "/orangeHR/organization/locations",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Structure",
+                "path": "/orangeHR/organization/structure",
+                "icon": "",
+                "child": []
+              },
+              {
+                "title": "Human Resources SOP",
+                "path": "/orangeHR/organization/hrsop",
+                "icon": "",
+                "child": []
+              },
+
+              {
+                "title": "PIM",
+                "path": "/orangeHR/PIM",
+                "icon": "ph:user-circle-gear",
+                "child": [
+                  {
+                    "title": "Configuration",
+                    "path": "/orangeHR/PIM/configuration",
+                    "icon": "",
+                    "child": [
+                      {
+                        "title": "Optional Fields",
+                        "path": "/orangeHR/PIM/configuration/optionalfield",
+                        "icon": "",
+                        "child": []
+                      },
+                      {
+                        "title": "Data Import",
+                        "path": "/orangeHR/PIM/configuration/dataimport",
+                        "icon": "",
+                        "child": []
+                      },
+                      {
+                        "title": "Reporting Methods",
+                        "path": "/orangeHR/PIM/configuration/reportingmethods",
+                        "icon": "",
+                        "child": []
+                      },
+                      {
+                        "title": "Termination Reasons",
+                        "path": "/orangeHR/PIM/configuration/terminationreasons",
+                        "icon": "",
+                        "child": []
+                      },
+                    ]
+                  },
+                  {
+                    "title": "Employee List",
+                    "path": "/orangeHR/PIM/employeelist",
+                    "icon": "ph:user-circle-gear",
+                    "child": []
+                  },
+                  {
+                    "title": "Add Employee",
+                    "path": "/orangeHR/PIM/addemployee",
+                    "icon": "ph:user-circle-gear",
+                    "child": []
+                  },
+                  {
+                    "title": "Employee Report",
+                    "path": "/orangeHR/PIM/report",
+                    "icon": "ph:user-circle-gear",
+                    "child": []
+                  }
+                ]
+              },
+        
+            ]
+          }
+        ]
+  },
+    
+  // {
+  //   "header": "Help",
+  //   "description": "Help and documentation",
+  //   "child": [
+  //     {
+  //       "title": "Documentation",
+  //       "icon": "solar:book-bookmark-minimalistic-bold",
+  //       "path": "https://manual.corrad.ai",
+  //       "external": true
+  //     },
+  //     {
+  //       "title": "UI Components",
+  //       "icon": "material-symbols:settings-input-component-outline-rounded",
+  //       "path": "https://ui.corrad.ai",
+  //       "external": true
+  //     }
+  //   ],
+  //   "meta": {
+  //     "auth": {
+  //       "role": [
+  //         "Developer"
+  //       ]
+  //     }
+  //   }
+  // }
 ];
