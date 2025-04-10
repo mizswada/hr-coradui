@@ -22,23 +22,23 @@ export default [
         child: [
           {
             title: "Skills",
-            path: "/admin/qualifications/skills",
+            path: "/qualifications/skills",
           },
           {
             title: "Education",
-            path: "/admin/qualifications/educations",
+            path: "/qualifications/educations",
           },
           {
             title: "Licenses",
-            path: "/admin/qualifications/licenses",
+            path: "/qualifications/licenses",
           },
           {
             title: "Languages",
-            path: "/admin/qualifications/languages",
+            path: "/qualifications/languages",
           },
           {
             title: "Memberships",
-            path: "/admin/qualifications/memberships",
+            path: "/qualifications/memberships",
           },
         ],
       },
