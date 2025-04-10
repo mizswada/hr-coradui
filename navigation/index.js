@@ -185,36 +185,36 @@ export default [
     "child": [
           {
             "title": "Job",
-            "path": "/orangeHR/jobtitles",
+            "path": "/jobtitles",
             "icon": "ic:sharp-list-alt",
             "child": [
               {
                 "title": "Job Title",
-                "path": "/orangeHR/jobtitles/job-title",
+                "path": "/jobtitles/job-title",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Pay Grades",
-                "path": "/orangeHR/jobtitles/pay-grades",
+                "path": "/jobtitles/pay-grades",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Employment Status",
-                "path": "/orangeHR/jobtitles/employmentstat",
+                "path": "/jobtitles/employmentstat",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Job Categories",
-                "path": "/orangeHR/jobtitles/jobcategories",
+                "path": "/jobtitles/jobcategories",
                 "icon": "",
                 "child": []
               },
               {
                 "title": "Work Shifts",
-                "path": "/orangeHR/jobtitles/workshifts",
+                "path": "/jobtitles/workshifts",
                 "icon": "",
                 "child": []
               }
