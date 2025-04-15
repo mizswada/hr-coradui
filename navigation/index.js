@@ -114,6 +114,14 @@ export default [
             title: "Assign leave",
             path: "/leave/assignLeave",
           },
+          {
+            title: "Calender",
+            path: "/leave/leaveCalender",
+          },
+          {
+            title: "Leave Application",
+            path: "/leave/leaveApplication",
+          },
         ],
       },
       {
