@@ -42,7 +42,7 @@ export default {
           "employeeName": "John Doe",
           "from": "10/05/2025",
           "to": "15/05/2025",
-          "days": "5",
+          "days": "10",
           "reason": "-",
           "Attachment": "Download",
           "type": "Annual",
