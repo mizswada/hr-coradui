@@ -1,133 +1,167 @@
 <script setup>
 import { ref } from 'vue';
 
-const workShifts = ref([
-  { name: 'Morning Shift', from: '08:00 AM', to: '04:00 PM', hoursPerDay: 8 },
-  { name: 'Evening Shift', from: '04:00 PM', to: '12:00 AM', hoursPerDay: 8 },
-  { name: 'Night Shift', from: '12:00 AM', to: '08:00 AM', hoursPerDay: 8 }
-]);
+const data = [
+  {
+    name: "Morning Shift",
+    from: "08:00 AM",
+    to: "04:00 PM",
+    hoursPerDay: 8,
+    action: "edit",
+  },
+  {
+    name: "Afternoon Shift",
+    from: "04:00 PM",
+    to: "12:00 AM",
+    hoursPerDay: 8,
+    action: "edit",
+  },
+  {
+    name: "Night Shift",
+    from: "12:00 AM",
+    to: "08:00 AM",
+    hoursPerDay: 8,
+    action: "edit",
+  },
+  {
+    name: "Weekend Shift",
+    from: "09:00 AM",
+    to: "05:00 PM",
+    hoursPerDay: 8,
+    action: "edit",
+  },
+  {
+    name: "Holiday Shift",
+    from: "10:00 AM",
+    to: "06:00 PM",
+    hoursPerDay: 8,
+    action: "edit",
+  }
+];
 
-const showShiftModal = ref(false);
-const showShiftModalForm = ref({
-  name: '',
-  from: '',
-  to: '',
-  hoursPerDay: 0,
+const showModal = ref(false);
+const showModalDelete = ref(false);
+const modalType = ref('');
+const showModalForm = ref({
+  shiftName: '',
+  description: '',
+});
+const showModalDeleteForm = ref({
+  shiftName: ''
 });
 
-const selectedShifts = ref([]);
-let editingShift = null;
+const columns = [
+  { name: 'name', label: 'Name' },
+  { name: 'description', label: 'Description' },
+  { name: 'action', label: 'Actions' }
+];
 
-const openShiftModal = (shift = null) => {
-  if (shift) {
-    showShiftModalForm.value.name = shift.name;
-    showShiftModalForm.value.from = shift.from;
-    showShiftModalForm.value.to = shift.to;
-    showShiftModalForm.value.hoursPerDay = shift.hoursPerDay;
-    editingShift = shift;
+function openModal(value, action) {
+  modalType.value = action;
+  if (action === 'edit' && value) {
+    showModalForm.value = { ...value };
   } else {
-    showShiftModalForm.value.name = '';
-    showShiftModalForm.value.from = '';
-    showShiftModalForm.value.to = '';
-    showShiftModalForm.value.hoursPerDay = 0;
-    editingShift = null;
+    showModalForm.value = {
+      shiftName: '',
+      description: '',
+    };
   }
-  showShiftModal.value = true;
-};
+  showModal.value = true;
+}
 
-const saveWorkShift = () => {
-  if (showShiftModalForm.value.name && showShiftModalForm.value.from && showShiftModalForm.value.to) {
-    if (editingShift) {
-      editingShift.name = showShiftModalForm.value.name;
-      editingShift.from = showShiftModalForm.value.from;
-      editingShift.to = showShiftModalForm.value.to;
-      editingShift.hoursPerDay = showShiftModalForm.value.hoursPerDay;
-    } else {
-      workShifts.value.push({ 
-        name: showShiftModalForm.value.name,
-        from: showShiftModalForm.value.from,
-        to: showShiftModalForm.value.to,
-        hoursPerDay: showShiftModalForm.value.hoursPerDay
-      });
-    }
-  }
-  showShiftModal.value = false;
-};
+function openModalDelete(value) {
+  showModalDeleteForm.value = { ...value };
+  showModalDelete.value = true;
+}
 
-const deleteWorkShift = (shift) => {
-  workShifts.value = workShifts.value.filter(ws => ws.name !== shift.name);
-};
+function openModalAdd() {
+  openModal(null, 'add');
+}
 
-const deleteSelectedShifts = () => {
-  workShifts.value = workShifts.value.filter(ws => !selectedShifts.value.includes(ws.name));
-  selectedShifts.value = [];
-};
+function saveShift() {
+  // Implement the logic to save shift
+  console.log('Save', showModalForm.value);
+  showModal.value = false;
+}
+
+function deleteShift() {
+  // Implement the logic to delete shift
+  console.log('Delete', showModalDeleteForm.value);
+  showModalDelete.value = false;
+}
 </script>
 
 <template>
-  <div class="p-4">
-   
-    <rs-card class="p-4 mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold" style="font-family: Arial;">Work Shifts</h1>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-full" @click="openShiftModal()" style="font-family: Arial;">+ Add</button>
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">Work Shifts</h1>
+    <div class="card p-4 mt-4">
+      <div class="flex justify-end items-center mb-4">
+        <rs-button @click="openModal(null, 'add')">
+          <Icon name="material-symbols:add" class="mr-1"></Icon>
+          Add
+        </rs-button>
       </div>
-      <hr class="mb-4">
-      <p class="text-gray-600 mb-4" style="font-family: Arial;">({{ workShifts.length }}) Record Found</p>
-      <div class="flex justify-between items-center mb-4">
-        <p class="text-gray-600" style="font-family: Arial;">({{ selectedShifts.length }}) Records Selected</p>
-        <button v-if="selectedShifts.length > 0" class="bg-red-400 text-white py-2 px-4 rounded-full" @click="deleteSelectedShifts" style="font-family: Arial;">Delete Selected</button>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="min-w-full bg-white">
-          <thead>
-            <tr>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;"> </th>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;">Name</th>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;">From</th>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;">To</th>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;">Hours Per Day</th>
-              <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600" style="font-family: Arial;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="shift in workShifts" :key="shift.name" class="hover:bg-gray-100">
-              <td class="py-2 px-4 border-b border-gray-200">
-                <input type="checkbox" v-model="selectedShifts" :value="shift.name" />
-              </td>
-              <td class="py-2 px-4 border-b border-gray-200 text-gray-700" style="font-family: Arial;">{{ shift.name }}</td>
-              <td class="py-2 px-4 border-b border-gray-200 text-gray-700" style="font-family: Arial;">{{ shift.from }}</td>
-              <td class="py-2 px-4 border-b border-gray-200 text-gray-700" style="font-family: Arial;">{{ shift.to }}</td>
-              <td class="py-2 px-4 border-b border-gray-200 text-gray-700" style="font-family: Arial;">{{ shift.hoursPerDay }}</td>
-              <td class="py-2 px-4 border-b border-gray-200">
-                <div class="flex gap-2">
-                  <button class="bg-green-200 text-gray-700 p-2 rounded-full" @click="openShiftModal(shift)">
-                    <Icon name="material-symbols:edit-outline-rounded" class="text-lg"></Icon>
-                  </button>
-                  <button class="bg-red-200 text-gray-700 p-2 rounded-full" @click="deleteWorkShift(shift)">
-                    <Icon name="material-symbols:delete-outline" class="text-lg"></Icon>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <rs-modal title="Work Shift" v-model="showShiftModal" ok-title="Save" :ok-callback="saveWorkShift">
-        <FormKit type="text" v-model="showShiftModalForm.name" name="name" label="Name" style="font-family: Arial;" />
-        <FormKit type="text" v-model="showShiftModalForm.from" name="from" label="From" style="font-family: Arial;" />
-        <FormKit type="text" v-model="showShiftModalForm.to" name="to" label="To" style="font-family: Arial;" />
-        <FormKit type="number" v-model="showShiftModalForm.hoursPerDay" name="hoursPerDay" label="Hours Per Day" style="font-family: Arial;" />
-      </rs-modal>
-    </rs-card>
+      <rs-table
+        :data="data"
+        :columns="columns"
+        :options="{
+          variant: 'default',
+          striped: true,
+          borderless: true,
+        }"
+        :options-advanced="{
+          sortable: true,
+          responsive: true,
+          filterable: false,
+        }"
+        advanced
+      >
+        <template v-slot:action="data">
+          <div
+            class="flex justify-center items-center"
+          >
+            <Icon
+              name="material-symbols:edit-outline-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer mr-1"
+              size="22"
+              @click="openModal(data.value, 'edit')"
+            ></Icon>
+            <Icon
+              name="material-symbols:close-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer"
+              size="22"
+              @click="openModalDelete(data.value)"
+            ></Icon>
+          </div>
+        </template>
+      </rs-table>
+    </div>
   </div>
+  <rs-modal
+    :title="modalType == 'edit' ? 'Edit Work Shift' : 'Add Work Shift'"
+    ok-title="Save"
+    :ok-callback="saveShift"
+    v-model="showModal"
+    :overlay-close="false"
+  >
+    <FormKit type="text" name="name" label="Name" style="font-family: Arial;" />
+    <FormKit type="text" name="from" label="From" style="font-family: Arial;" />
+    <FormKit type="text" name="to" label="To" style="font-family: Arial;" />
+    <FormKit type="number" name="hoursPerDay" label="Hours Per Day" style="font-family: Arial;" :value="0" />
+  </rs-modal>
+  <!-- Modal Delete Confirmation -->
+  <rs-modal
+    title="Delete Confirmation"
+    ok-title="Yes"
+    cancel-title="No"
+    :ok-callback="deleteShift"
+    v-model="showModalDelete"
+    :overlay-close="false"
+  >
+    <p>
+      Are you sure want to delete this work shift {{
+        showModalDeleteForm.shiftName
+      }}?
+    </p>
+  </rs-modal>
 </template>
-
-<style scoped>
-/* Add any additional styles here */
-.rs-card {
-  border-radius: 10px;
-  font-family: Arial;
-}
-</style>

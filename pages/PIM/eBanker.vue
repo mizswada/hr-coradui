@@ -3,18 +3,43 @@ import { ref } from 'vue';
 
 const data = [
   {
-    name: "Programmer",
-    description: "Job in programming field",
+    name: "Ahmad bin Ali",
+    description: "Handles customer account management and transactions.",
+    email: "ahmad.ali@example.com",
+    date: "2023-10-01",
+    office: "ANSI",
     action: "edit",
   },
   {
-    name: "Designer",
-    description: "Job in designing field",
+    name: "Siti binti Aminah",
+    description: "Responsible for loan processing and approvals.",
+    email: "siti.aminah@example.com",
+    date: "2023-10-02",
+    office: "CORRAD SOFTWARE SDN BHD",
     action: "edit",
   },
   {
-    name: "Sales Manager",
-    description: "Job in sales management",
+    name: "Ali bin Hassan",
+    description: "Manages digital banking services and platforms.",
+    email: "ali.hassan@example.com",
+    date: "2023-10-03",
+    office: "ARTIFICIAL INTELLIGENCE SDN BHD",
+    action: "edit",
+  },
+  {
+    name: "Nurul binti Rahman",
+    description: "Oversees compliance and regulatory requirements.",
+    email: "nurul.rahman@example.com",
+    date: "2023-10-04",
+    office: "TOYYIBPAY SDN BHD",
+    action: "edit",
+  },
+  {
+    name: "Hafiz bin Karim",
+    description: "Provides customer support for banking inquiries.",
+    email: "hafiz.karim@example.com",
+    date: "2023-10-05",
+    office: "DATASCIENCE SDN BHD",
     action: "edit",
   }
 ];
@@ -40,8 +65,7 @@ import { DateTime } from "luxon";
         
         const dt = DateTime.now();
 
-        const dateStart = dt.plus({ days: -7 }).toFormat("yyyy-MM-dd");
-        const dateEnd = dt.plus({ days: 7 }).toFormat("yyyy-MM-dd");
+        const date = dt.toISODate();
 
  const title = [
         { label: "select", value: "my", attrs: { disabled: true } },,
@@ -97,7 +121,7 @@ function deleteSkill() {
 
 <template>
   <div class="mb-4">
-    <h1 class="text-2xl font-bold">Jobs</h1>
+    <h1 class="text-2xl font-bold">e-Banker</h1>
     <div class="card p-4 mt-4">
       <div class="flex justify-end items-center mb-4">
         <rs-button @click="openModal(null, 'add')">
@@ -142,45 +166,49 @@ function deleteSkill() {
     </div>
   </div>
   <rs-modal
-    :title="modalType == 'edit' ? 'Edit Job' : 'Add Job'"
+    :title="modalType == 'edit' ? 'Edit Data' : 'Add Data'"
     ok-title="Save"
     :ok-callback="saveSkill"
     v-model="showModal"
     :overlay-close="false"
   >
-  <FormKit
-                        type="date"
-                        label="Date"
-                        help="Enter date (the date must be between 6/6/2022 and 20/6/2022)"
-                        :validation="[['date_between', dateStart, dateEnd]]"
-                        validation-visibility="live"
+
+  <FormKit 
+    type="text" 
+    label="Required Validation"
+    validation="required"
+    validation-visibility="dirty"
+  >
+    <template #label>
+      <label
+        class="formkit-label text-gray-700 dark:text-gray-200 block mb-2 font-semibold text-sm"
+      >
+        Name <span class="text-danger">*</span>
+      </label>
+    </template>
+  </FormKit>
+
+  <FormKit type="date" :value="date" label="Date" />
+
+  <FormKit 
+                        type="text" 
+                        label="Email"
+                        validation="email"
+                        validation-visibility="dirty"
                       />
 
-    <FormKit
-                        type="select"
-                        label="Job title"
-                        :options="title"
-                      />
-                      <FormKit type="text" label="Job Specification" value="Not Specified" readonly/>
+    
                       <FormKit
                         type="select"
-                        label="Job Category"
-                        :options="categories"
-                      />
-                      <FormKit
-                        type="select"
-                        label="Sub Unit"
-                        :options="[{ label: 'Select', value: '', attrs: { disabled: true } }, 'HR', 'Finance', 'IT']"
-                      />
-                      <FormKit
-                        type="select"
-                        label="Location"
-                        :options="[{ label: 'Select', value: '', attrs: { disabled: true } }, 'New York', 'London', 'Tokyo']"
-                      />
-                      <FormKit
-                        type="select"
-                        label="Employment Status"
-                        :options="[{ label: 'Select', value: '', attrs: { disabled: true } }, 'Full-Time', 'Part-Time', 'Contract']"
+                        label="Office"
+                        :options="[
+                          { label: 'Select', value: '', attrs: { disabled: true } },
+                          { label: 'ANSI', value: 'ansi' },
+                          { label: 'CORRAD SOFTWARE SDN BHD', value: 'corrad_software_sdn_bhd' },
+                          { label: 'ARTIFICIAL INTELLIGENCE SDN BHD', value: 'artificial_intelligence_sdn_bhd' },
+                          { label: 'TOYYIBPAY SDN BHD', value: 'toyyibpay_sdn_bhd' },
+                          { label: 'DATASCIENCE SDN BHD', value: 'datascience_sdn_bhd' }
+                        ]"
                       />
     <FormKit
       type="textarea"
@@ -201,7 +229,7 @@ function deleteSkill() {
     :overlay-close="false"
   >
     <p>
-      Are you sure want to delete this job {{
+      Are you sure want to delete this data {{
         showModalDeleteForm.skillName
       }}?
     </p>

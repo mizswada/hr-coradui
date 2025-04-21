@@ -309,6 +309,11 @@ export default [
                 "title": "Employee Report",
                 "path": "/PIM/report",
                 "icon": "ph:user-circle-gear",
+              },
+              {
+                "title": "e-Banker",
+                "path": "/PIM/eBanker",
+                "icon": "ph:user-circle-gear",
               }
             ]
           },

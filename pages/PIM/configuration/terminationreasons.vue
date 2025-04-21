@@ -1,100 +1,144 @@
 <script setup>
 import { ref } from 'vue';
 
-const terminationReasons = ref([
-  { reason: 'Resignation' },
-  { reason: 'Retirement' },
-  { reason: 'Termination due to Performance' },
-  { reason: 'Layoff' },
-  { reason: 'End of Contract' }
-]);
+const data = [
+  {
+    name: "Resigned",
+    action: "edit",
+  },
+  {
+    name: "Terminated",
+    action: "edit",
+  },
+  {
+    name: "Retired",
+    action: "edit",
+  }
+];
 
-const showReasonModal = ref(false);
-const showReasonModalForm = ref({
-  reason: '',
+const showModal = ref(false);
+const showModalDelete = ref(false);
+const modalType = ref('');
+const showModalForm = ref({
+  reasonName: '',
+  description: '',
+});
+const showModalDeleteForm = ref({
+  reasonName: ''
 });
 
-const selectedReasons = ref([]);
-let editingReason = null;
+const columns = [
+  { name: 'name', label: 'Reason' },
+  { name: 'description', label: 'Description' },
+  { name: 'action', label: 'Actions' }
+];
 
-const openReasonModal = (reason = null) => {
-  if (reason) {
-    showReasonModalForm.value.reason = reason.reason;
-    editingReason = reason;
+function openModal(value, action) {
+  modalType.value = action;
+  if (action === 'edit' && value) {
+    showModalForm.value = { ...value };
   } else {
-    showReasonModalForm.value.reason = '';
-    editingReason = null;
+    showModalForm.value = {
+      reasonName: '',
+      description: '',
+    };
   }
-  showReasonModal.value = true;
-};
+  showModal.value = true;
+}
 
-const saveTerminationReason = () => {
-  if (showReasonModalForm.value.reason) {
-    if (editingReason) {
-      editingReason.reason = showReasonModalForm.value.reason;
-    } else {
-      terminationReasons.value.push({ reason: showReasonModalForm.value.reason });
-    }
-  }
-  showReasonModal.value = false;
-};
+function openModalDelete(value) {
+  showModalDeleteForm.value = { ...value };
+  showModalDelete.value = true;
+}
 
-const deleteTerminationReason = (reason) => {
-  terminationReasons.value = terminationReasons.value.filter(tr => tr.reason !== reason.reason);
-};
+function openModalAdd() {
+  openModal(null, 'add');
+}
 
-const deleteSelectedReasons = () => {
-  terminationReasons.value = terminationReasons.value.filter(tr => !selectedReasons.value.includes(tr.reason));
-  selectedReasons.value = [];
-};
+function saveReason() {
+  // Implement the logic to save reason
+  console.log('Save', showModalForm.value);
+  showModal.value = false;
+}
+
+function deleteReason() {
+  // Implement the logic to delete reason
+  console.log('Delete', showModalDeleteForm.value);
+  showModalDelete.value = false;
+}
 </script>
 
 <template>
-  <div class="p-4">
-    <rs-card class="p-4 mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold" style="font-family: Arial;">Termination Reasons</h1>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-full" @click="openReasonModal()" style="font-family: Arial;">+ Add</button>
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">Termination Reasons</h1>
+    <div class="card p-4 mt-4">
+      <div class="flex justify-end items-center mb-4">
+        <rs-button @click="openModal(null, 'add')">
+          <Icon name="material-symbols:add" class="mr-1"></Icon>
+          Add
+        </rs-button>
       </div>
-      <hr class="mb-4">
-      <p class="text-gray-600 mb-4" style="font-family: Arial;">({{ terminationReasons.length }}) Records Found</p>
-      <div class="flex justify-between items-center mb-4">
-        <p class="text-gray-600" style="font-family: Arial;">({{ selectedReasons.length }}) Records Selected</p>
-        <button v-if="selectedReasons.length > 0" class="bg-red-400 text-white py-2 px-4 rounded-full" @click="deleteSelectedReasons" style="font-family: Arial;">Delete Selected</button>
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        <rs-card v-for="reason in terminationReasons" :key="reason.reason" class="p-4 bg-gray-100 rounded-lg relative">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <input type="checkbox" v-model="selectedReasons" :value="reason.reason" />
-              <div>
-                <h6 class="font-semibold text-gray-700" style="font-family: Arial;">Termination Reason</h6>
-                <p class="text-gray-500 text-lg" style="font-family: Arial;">{{ reason.reason }}</p>
-              </div>
-            </div>
-            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col items-center gap-2">
-              <button class="bg-green-200 text-gray-700 p-2 rounded-full" @click="openReasonModal(reason)">
-                <Icon name="material-symbols:edit-outline-rounded" class="text-lg"></Icon>
-              </button>
-              <button class="bg-red-200 text-gray-700 p-2 rounded-full" @click="deleteTerminationReason(reason)">
-                <Icon name="material-symbols:delete-outline" class="text-lg"></Icon>
-              </button>
-            </div>
+      <rs-table
+        :data="data"
+        :columns="columns"
+        :options="{
+          variant: 'default',
+          striped: true,
+          borderless: true,
+        }"
+        :options-advanced="{
+          sortable: true,
+          responsive: true,
+          filterable: false,
+        }"
+        advanced
+      >
+        <template v-slot:action="data">
+          <div
+            class="flex justify-center items-center"
+          >
+            <Icon
+              name="material-symbols:edit-outline-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer mr-1"
+              size="22"
+              @click="openModal(data.value, 'edit')"
+            ></Icon>
+            <Icon
+              name="material-symbols:close-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer"
+              size="22"
+              @click="openModalDelete(data.value)"
+            ></Icon>
           </div>
-        </rs-card>
-      </div>
-
-      <rs-modal title="Termination Reason" v-model="showReasonModal" ok-title="Save" :ok-callback="saveTerminationReason">
-        <FormKit type="text" v-model="showReasonModalForm.reason" name="Name" label="Name" style="font-family: Arial;" />
-      </rs-modal>
-    </rs-card>
+        </template>
+      </rs-table>
+    </div>
   </div>
+  <rs-modal
+    :title="modalType == 'edit' ? 'Edit Termination Reason' : 'Add Termination Reason'"
+    ok-title="Save"
+    :ok-callback="saveReason"
+    v-model="showModal"
+    :overlay-close="false"
+  >
+  <FormKit type="text"  name="title" label="Reason" style="font-family: Arial;"
+   />
+    
+    
+  </rs-modal>
+  <!-- Modal Delete Confirmation -->
+  <rs-modal
+    title="Delete Confirmation"
+    ok-title="Yes"
+    cancel-title="No"
+    :ok-callback="deleteReason"
+    v-model="showModalDelete"
+    :overlay-close="false"
+  >
+    <p>
+      Are you sure want to delete this termination reason {{
+        showModalDeleteForm.reasonName
+      }}?
+    </p>
+  </rs-modal>
 </template>
-
-<style scoped>
-/* Add any additional styles here */
-.rs-card {
-  border-radius: 10px;
-  font-family: Arial;
-}
-</style>

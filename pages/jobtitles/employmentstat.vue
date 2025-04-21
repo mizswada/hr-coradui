@@ -1,102 +1,154 @@
 <script setup>
 import { ref } from 'vue';
 
-const employmentStatuses = ref([
-  { status: 'Full-Time Permanent' },
-  { status: 'Part-Time Permanent' },
-  { status: 'Full-Time Contract' },
-  { status: 'Part-Time Contract' },
-  { status: 'Internship' }
-]);
+const data = [
+  {
+    name: "Full-Time Permanent",
+    action: "edit",
+  },
+  {
+    name: "Part-Time Permanent",
+    action: "edit",
+  },
+  {
+    name: "Full-Time Contract",
+    action: "edit",
+  },
+  {
+    name: "Part-Time Contract",
+    action: "edit",
+  },
+  {
+    name: "Internship",
+    action: "edit",
+  }
+];
 
-const showStatusModal = ref(false);
-const showStatusModalForm = ref({
-  status: '',
+const showModal = ref(false);
+const showModalDelete = ref(false);
+const modalType = ref('');
+const showModalForm = ref({
+  skillName: '',
+  description: '',
+});
+const showModalDeleteForm = ref({
+  skillName: ''
 });
 
-const selectedStatuses = ref([]);
-let editingStatus = null;
+const columns = [
+  { name: 'name', label: 'Name' },
+  { name: 'description', label: 'Description' },
+  { name: 'action', label: 'Actions' }
+];
 
-const openStatusModal = (status = null) => {
-  if (status) {
-    showStatusModalForm.value.status = status.status;
-    editingStatus = status;
+
+
+function openModal(value, action) {
+  modalType.value = action;
+  if (action === 'edit' && value) {
+    showModalForm.value = { ...value };
   } else {
-    showStatusModalForm.value.status = '';
-    editingStatus = null;
+    showModalForm.value = {
+      skillName: '',
+      description: '',
+    };
   }
-  showStatusModal.value = true;
-};
+  showModal.value = true;
+}
 
-const saveEmploymentStatus = () => {
-  if (showStatusModalForm.value.status) {
-    if (editingStatus) {
-      editingStatus.status = showStatusModalForm.value.status;
-    } else {
-      employmentStatuses.value.push({ status: showStatusModalForm.value.status });
-    }
-  }
-  showStatusModal.value = false;
-};
+function openModalDelete(value) {
+  showModalDeleteForm.value = { ...value };
+  showModalDelete.value = true;
+}
 
-const deleteEmploymentStatus = (status) => {
-  employmentStatuses.value = employmentStatuses.value.filter(es => es.status !== status.status);
-};
+function openModalAdd() {
+  openModal(null, 'add');
+}
 
-const deleteSelectedStatuses = () => {
-  employmentStatuses.value = employmentStatuses.value.filter(es => !selectedStatuses.value.includes(es.status));
-  selectedStatuses.value = [];
-};
+function saveSkill() {
+  // Implement the logic to save user
+  console.log('Save', showModalForm.value);
+  showModal.value = false;
+}
+
+function deleteSkill() {
+  // Implement the logic to delete user
+  console.log('Delete', showModalDeleteForm.value);
+  showModalDelete.value = false;
+}
 </script>
 
 <template>
-  <div class="p-4">
-   
-    <!-- Removed Pay Grades section -->
-    <rs-card class="p-4 mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold" style="font-family: Arial;">Employment Status</h1>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-full" @click="openStatusModal()" style="font-family: Arial;">+ Add</button>
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">Employment Status</h1>
+    <div class="card p-4 mt-4">
+      <div class="flex justify-end items-center mb-4">
+        <rs-button @click="openModal(null, 'add')">
+          <Icon name="material-symbols:add" class="mr-1"></Icon>
+          Add Employment Status
+        </rs-button>
       </div>
-      <hr class="mb-4">
-      <p class="text-gray-600 mb-4" style="font-family: Arial;">({{ employmentStatuses.length }}) Records Found</p>
-      <div class="flex justify-between items-center mb-4">
-        <p class="text-gray-600" style="font-family: Arial;">({{ selectedStatuses.length }}) Records Selected</p>
-        <button v-if="selectedStatuses.length > 0" class="bg-red-400 text-white py-2 px-4 rounded-full" @click="deleteSelectedStatuses" style="font-family: Arial;">Delete Selected</button>
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        <rs-card v-for="status in employmentStatuses" :key="status.status" class="p-4 bg-gray-100 rounded-lg relative">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <input type="checkbox" v-model="selectedStatuses" :value="status.status" />
-              <div>
-                <h6 class="font-semibold text-gray-700" style="font-family: Arial;">Employment Status</h6>
-                <p class="text-gray-500 text-lg" style="font-family: Arial;">{{ status.status }}</p>
-              </div>
-            </div>
-            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col items-center gap-2">
-              <button class="bg-green-200 text-gray-700 p-2 rounded-full" @click="openStatusModal(status)">
-                <Icon name="material-symbols:edit-outline-rounded" class="text-lg"></Icon>
-              </button>
-              <button class="bg-red-200 text-gray-700 p-2 rounded-full" @click="deleteEmploymentStatus(status)">
-                <Icon name="material-symbols:delete-outline" class="text-lg"></Icon>
-              </button>
-            </div>
+      <rs-table
+        :data="data"
+        :columns="columns"
+        :options="{
+          variant: 'default',
+          striped: true,
+          borderless: true,
+        }"
+        :options-advanced="{
+          sortable: true,
+          responsive: true,
+          filterable: false,
+        }"
+        advanced
+      >
+        <template v-slot:action="data">
+          <div
+            class="flex justify-center items-center"
+          >
+            <Icon
+              name="material-symbols:edit-outline-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer mr-1"
+              size="22"
+              @click="openModal(data.value, 'edit')"
+            ></Icon>
+            <Icon
+              name="material-symbols:close-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer"
+              size="22"
+              @click="openModalDelete(data.value)"
+            ></Icon>
           </div>
-        </rs-card>
-      </div>
-
-      <rs-modal title="Employment Status" v-model="showStatusModal" ok-title="Save" :ok-callback="saveEmploymentStatus">
-        <FormKit type="text" v-model="showStatusModalForm.status" name="status" label="Status" style="font-family: Arial;" />
-      </rs-modal>
-    </rs-card>
+        </template>
+      </rs-table>
+    </div>
   </div>
+  <rs-modal
+    :title="modalType == 'edit' ? 'Edit Employment Status' : 'Add Employment Status'"
+    ok-title="Save"
+    :ok-callback="saveSkill"
+    v-model="showModal"
+    :overlay-close="false"
+  >
+  <FormKit type="text"  name="title" label="Employment Status " style="font-family: Arial;"
+   />
+    
+    
+  </rs-modal>
+  <!-- Modal Delete Confirmation -->
+  <rs-modal
+    title="Delete Confirmation"
+    ok-title="Yes"
+    cancel-title="No"
+    :ok-callback="deleteSkill"
+    v-model="showModalDelete"
+    :overlay-close="false"
+  >
+    <p>
+      Are you sure want to delete this employment status {{
+        showModalDeleteForm.skillName
+      }}?
+    </p>
+  </rs-modal>
 </template>
-
-<style scoped>
-/* Add any additional styles here */
-.rs-card {
-  border-radius: 10px;
-  font-family: Arial;
-}
-</style>

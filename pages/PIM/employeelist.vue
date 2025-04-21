@@ -1,200 +1,227 @@
 <script setup>
 import { ref } from 'vue';
 
+const data = [
+  {
+    name: "John Doe",
+    employeeId: "E001",
+    employmentStatus: "full_time",
+    include: "current",
+    supervisorName: "Michael Scott",
+    jobTitle: "Manager",
+    subUnit: "HR",
+    action: "edit",
+  },
+  {
+    name: "Jane Smith",
+    employeeId: "E002",
+    employmentStatus: "part_time",
+    include: "current",
+    supervisorName: "Pam Beesly",
+    jobTitle: "Analyst",
+    subUnit: "Marketing",
+    action: "edit",
+  },
+  {
+    name: "Alice Johnson",
+    employeeId: "E003",
+    employmentStatus: "contract",
+    include: "past",
+    supervisorName: "Jim Halpert",
+    jobTitle: "Developer",
+    subUnit: "Engineering",
+    action: "edit",
+  }
+];
 
-
-const jobTitles = ref([
-  { title: 'Software Engineer' },
-  { title: 'Data Analyst' },
-  { title: 'HR Manager' }
-]);
-
-const showTitleModal = ref(false);
-const showTitleModalForm = ref({
-  title: '',
-  department: '',
+const showModal = ref(false);
+const showModalDelete = ref(false);
+const modalType = ref('');
+const showModalForm = ref({
+  employeeName: '',
   description: '',
-  documents: null,
+});
+const showModalDeleteForm = ref({
+  employeeName: ''
 });
 
-const selectedTitles = ref([]);
-let editingTitle = null;
+const columns = [
+  { name: 'name', label: 'Employee Name' },
+  { name: 'employeeId', label: 'Employee ID' },
+  { name: 'employmentStatus', label: 'Employment Status' },
+  { name: 'include', label: 'Include' },
+  { name: 'supervisorName', label: 'Supervisor Name' },
+  { name: 'jobTitle', label: 'Job Title' },
+  { name: 'subUnit', label: 'Sub Unit' },
+  { name: 'action', label: 'Actions' }
+];
 
-const openTitleModal = (title = null) => {
-  if (title) {
-    showTitleModalForm.value.title = title.title;
-    editingTitle = title;
+
+
+function openModal(value, action) {
+  modalType.value = action;
+  if (action === 'edit' && value) {
+    showModalForm.value = { ...value };
   } else {
-    showTitleModalForm.value.title = '';
-    showTitleModalForm.value.department = '';
-    showTitleModalForm.value.description = '';
-    showTitleModalForm.value.documents = null;
-    editingTitle = null;
+    showModalForm.value = {
+      employeeName: '',
+      description: '',
+    };
   }
-  showTitleModal.value = true;
-};
-
-const saveJobTitle = () => {
-  if (showTitleModalForm.value.title) {
-    if (editingTitle) {
-      editingTitle.title = showTitleModalForm.value.title;
-    } else {
-      jobTitles.value.push({ title: showTitleModalForm.value.title });
-    }
-  }
-  showTitleModal.value = false;
-};
-
-const deleteJobTitle = (title) => {
-  jobTitles.value = jobTitles.value.filter(jt => jt.title !== title.title);
-};
-
-const deleteSelectedTitles = () => {
-  jobTitles.value = jobTitles.value.filter(jt => !selectedTitles.value.includes(jt.title));
-  selectedTitles.value = [];
-};
-
-const employmentStatusOptions = [
-  { label: "Full-Time", value: "full-time" },
-  { label: "Part-Time", value: "part-time" },
-  { label: "Contract", value: "contract" },
-];
-
-const includeOptions = [
-  { label: "Current Employees Only", value: "current" },
-  { label: "All Employees", value: "all" },
-];
-
-const jobTitleOptions = [
-  { label: "Developer", value: "developer" },
-  { label: "Jr.Developer", value: "jr.developer" },
-  { label: "UI/UX Developer", value: "UI/UX developer" },
-];
-
-const subUnitOptions = [
-  { label: "Toyyibpay Sdn Bhd", value: "toyyibpay" },
-  { label: "Unit Developer RnD", value: "rnd" },
-  { label: "Corrad Software", value: "corrad" },
-  { label: "Product", value: "product" },
-  { label: "fdsfsd", value: "fdsfsd" },
-];
-
-
-function search() {
-  alert("Search triggered");
+  showModal.value = true;
 }
 
-function resetForm() {
-  alert("Form reset");
+function openModalDelete(value) {
+  showModalDeleteForm.value = { ...value };
+  showModalDelete.value = true;
 }
 
+function openModalAdd() {
+  openModal(null, 'add');
+}
+
+function saveEmployee() {
+  // Implement the logic to save employee
+  console.log('Save', showModalForm.value);
+  showModal.value = false;
+}
+
+function deleteEmployee() {
+  // Implement the logic to delete employee
+  console.log('Delete', showModalDeleteForm.value);
+  showModalDelete.value = false;
+}
 </script>
 
 <template>
-  <div class="p-4">
- 
-    <rs-card class="p-4 mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold" style="font-family: Arial;">Employee List </h1>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-full" @click="openTitleModal()" style="font-family: Arial;">+ Add</button>
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">Employee List</h1>
+    <div class="card p-4 mt-4">
+      <div class="flex justify-end items-center mb-4">
+        <rs-button @click="openModal(null, 'add')">
+          <Icon name="material-symbols:add" class="mr-1"></Icon>
+          Add
+        </rs-button>
       </div>
-      <hr class="mb-4">
-      <p class="text-gray-600 mb-4" style="font-family: Arial;">({{ jobTitles.length }}) Records Found</p>
-      <div class="flex justify-between items-center mb-4">
-        <p class="text-gray-600" style="font-family: Arial;">({{ selectedTitles.length }}) Records Selected</p>
-        <button v-if="selectedTitles.length > 0" class="bg-red-400 text-white py-2 px-4 rounded-full" @click="deleteSelectedTitles" style="font-family: Arial;">Delete Selected</button>
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        <rs-card v-for="title in jobTitles" :key="title.title" class="p-4 bg-gray-100 rounded-lg relative">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <input type="checkbox" v-model="selectedTitles" :value="title.title" />
-              <div>
-                <h6 class="font-semibold text-gray-700" style="font-family: Arial;">Employee List </h6>
-                <p class="text-gray-500 text-lg" style="font-family: Arial;">{{ title.title }}</p>
-              </div>
-            </div>
-            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col items-center gap-2">
-              <button class="bg-green-200 text-gray-700 p-2 rounded-full" @click="openTitleModal(title)">
-                <Icon name="material-symbols:edit-outline-rounded" class="text-lg"></Icon>
-              </button>
-              <button class="bg-red-200 text-gray-700 p-2 rounded-full" @click="deleteJobTitle(title)">
-                <Icon name="material-symbols:delete-outline" class="text-lg"></Icon>
-              </button>
-            </div>
+      <rs-table
+        :data="data"
+        :columns="columns"
+        :options="{
+          variant: 'default',
+          striped: true,
+          borderless: true,
+        }"
+        :options-advanced="{
+          sortable: true,
+          responsive: true,
+          filterable: false,
+        }"
+        advanced
+      >
+        <template v-slot:action="data">
+          <div
+            class="flex justify-center items-center"
+          >
+            <Icon
+              name="material-symbols:edit-outline-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer mr-1"
+              size="22"
+              @click="openModal(data.value, 'edit')"
+            ></Icon>
+            <Icon
+              name="material-symbols:close-rounded"
+              class="text-primary hover:text-primary/90 cursor-pointer"
+              size="22"
+              @click="openModalDelete(data.value)"
+            ></Icon>
           </div>
-        </rs-card>
-      </div>
+        </template>
+      </rs-table>
+    </div>
+  </div>
+  <rs-modal
+    :title="modalType == 'edit' ? 'Edit Employee' : 'Add Employee'"
+    ok-title="Save"
+    :ok-callback="saveEmployee"
+    v-model="showModal"
+    :overlay-close="false"
+  >
 
-
-      <rs-modal title="Human Resources SOP" v-model="showTitleModal" ok-title="Save" :ok-callback="saveJobTitle">
-        <div class="grid grid-cols-1 gap-4">
-          <div>
-        <FormKit 
+   <FormKit 
           type="text" 
           label="Employee Name" 
-          placeholder="Type for hints..."
+  
         />
-      <div>
+
         <FormKit 
           type="text" 
           label="Employee Id" 
           placeholder="Type for hints..."
         />
-      </div>
-      </div>
-      <div>
+
         <FormKit 
           type="select" 
           label="Employment Status" 
-          :options="employmentStatusOptions"
+          :options="[
+            { value: 'full_time', label: 'Full-Time' },
+            { value: 'part_time', label: 'Part-Time' },
+            { value: 'contract', label: 'Contract' }
+          ]"
         />
-      </div>
-      <div>
+     
         <FormKit 
           type="select" 
           label="Include" 
-          :options="includeOptions"
+          :options="[
+            { value: 'current', label: 'Current Employees' },
+            { value: 'past', label: 'Past Employees' },
+            { value: 'all', label: 'All Employees' }
+          ]"
         />
-      </div>
-      <div>
+    
         <FormKit 
           type="text" 
           label="Supervisor Name" 
           placeholder="Type for hints..."
         />
-      </div>
-      <div>
+    
         <FormKit 
           type="select" 
           label="Job Title" 
-          :options="jobTitleOptions" 
+          :options="[
+            { value: 'developer', label: 'Developer' },
+            { value: 'manager', label: 'Manager' },
+            { value: 'analyst', label: 'Analyst' }
+          ]" 
           placeholder="-- Select --"
         />
-      </div>
-      <div>
+     
         <FormKit 
           type="select" 
           label="Sub Unit" 
-          :options="subUnitOptions" 
+          :options="[
+            { value: 'engineering', label: 'Engineering' },
+            { value: 'hr', label: 'Human Resources' },
+            { value: 'marketing', label: 'Marketing' }
+          ]" 
           placeholder="-- Select --"
         />
-      </div>
-      <div class="flex gap-4 mt-4">
-        <rs-button variant="secondary" @click="resetForm">Reset</rs-button>
-        <rs-button variant="primary" @click="search">Search</rs-button>
-      </div>
-    </div>
-        <FormKit type="textarea" placeholder="Type your messages here ..." label="Description" help="Enter a comment about the document." />
-      </rs-modal>
-    </rs-card>
-  </div>
+      
+    
+  </rs-modal>
+  <!-- Modal Delete Confirmation -->
+  <rs-modal
+    title="Delete Confirmation"
+    ok-title="Yes"
+    cancel-title="No"
+    :ok-callback="deleteEmployee"
+    v-model="showModalDelete"
+    :overlay-close="false"
+  >
+    <p>
+      Are you sure want to delete this employee {{
+        showModalDeleteForm.employeeName
+      }}?
+    </p>
+  </rs-modal>
 </template>
-
-<style scoped>
-/* Add any additional styles here */
-.rs-card {
-  border-radius: 10px;
-  font-family: Arial;
-}
-</style>
